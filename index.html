@@ -1259,10 +1259,9 @@
   <span id="lightbox-close" onclick="closeLightbox()">✕</span>
   <div id="lightbox-content">
     <div style="position:relative; display:flex; align-items:center; gap:1rem;">
-      <button id="lb-prev" onclick="lbNav(-1)" style="display:none; background:rgba(255,255,255,0.1); border:none; color:#fff; font-size:1.5rem; width:44px; height:44px; border-radius:50%; cursor:pointer; align-items:center; justify-content:center; transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">‹</button>
+      <button id="lb-prev" onclick="lbNav(-1)" style="display:none; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.2); color:#fff; font-size:2rem; width:52px; height:52px; border-radius:50%; cursor:pointer; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.35)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">‹</button>
       <img id="lightbox-img" src="" alt="">
-      <button id="lb-next" onclick="lbNav(1)"  style="display:none; background:rgba(255,255,255,0.1); border:none; color:#fff; font-size:1.5rem; width:44px; height:44px; border-radius:50%; cursor:pointer; align-items:center; justify-content:center; transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">›</button>
-    </div>
+      <button id="lb-next" onclick="lbNav(1)" style="display:none; background:rgba(255,255,255,0.15); border:1px solid rgba(255,255,255,0.2); color:#fff; font-size:2rem; width:52px; height:52px; border-radius:50%; cursor:pointer; align-items:center; justify-content:center; flex-shrink:0; transition:background .2s;" onmouseover="this.style.background='rgba(255,255,255,0.35)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'">›</button>
     <div style="display:flex; gap:1rem; align-items:center; justify-content:center;">
       <div id="lightbox-caption"></div>
       <div id="lb-counter" style="font-family:var(--mono); font-size:0.62rem; color:rgba(255,255,255,0.3);"></div>
@@ -1321,7 +1320,11 @@ function closeLightbox() {
   }, 240);
 }
 
-document.getElementById('lightbox-bg').addEventListener('click', closeLightbox);
+document.getElementById('lightbox').addEventListener('click', function(e) {
+  if (!document.getElementById('lightbox-content').contains(e.target) && e.target.id !== 'lightbox-close') {
+    closeLightbox();
+  }
+});
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape') closeLightbox();
   if (e.key === 'ArrowRight') lbNav(1);
